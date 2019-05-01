@@ -58,9 +58,8 @@ jobs:
         popd
 
         pushd ../edk2
-        python3 ../imx-edk2-platforms/ci/build_cgmanifest.py ../imx-edk2-platforms/ci/cgmanifest_template.json
+        python3 ../imx-edk2-platforms/ci/build_cgmanifest.py
         cat cgmanifest.json
-        popd
       displayName: Generate dynamic Component Governance cgmanifest.json
       
     - task: ComponentGovernanceComponentDetection@0
