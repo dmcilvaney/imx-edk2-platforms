@@ -52,16 +52,15 @@ jobs:
       displayName: Relocate EDK2 platforms directory
 
     - script: |
-        pushd ../imx-iotcore
-        echo build/firmware/$(Target)
-        ls
-        cd build/firmware/$(Target)
-        make uefi CROSS_COMPILE=$(Build.SourcesDirectory)/gcc-linaro-6.4.1-2017.11-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-
-      displayName: Build UEFI
-
-    - script: |
+        pushd ../imx-edk2-platforms
         python3 ci/build_cgmanifest.py ci/cgmanifest_template.json
         cat cgmanifest.json
+        popd
+
+        pushd ../edk2
+        python3 ../imx-edk2-platforms/ci/build_cgmanifest.py ../imx-edk2-platforms/ci/cgmanifest_template.json
+        cat cgmanifest.json
+        popd
       displayName: Generate dynamic Component Governance cgmanifest.json
       
     - task: ComponentGovernanceComponentDetection@0
